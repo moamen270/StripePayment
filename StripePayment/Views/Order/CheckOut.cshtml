@@ -1,0 +1,121 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<StripePayment.Setting.StripeSetting> Stripe
+@model StripePayment.Models.Dtos.OrderDto
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> _signInManager
+@inject UserManager<User> _userManager
+
+	
+<form asp-controller="Order" asp-action="CheckOut" method="post" oninput="TotalPrice.value = parseInt(price.value)*parseInt(quantity.value)">
+
+
+	
+
+
+	<div class="checkout-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="checkout-accordion-wrap">
+						<div class="accordion" id="accordionExample">
+							<div class="card single-accordion">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+											Check Out 
+									</h5>
+								</div>
+
+								<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+									<div class="card-body">
+										<div class="billing-address-form">
+											<input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
+											<p><input class="form-control p-4" type="text" asp-for="UserFirstName"  disabled></p>
+											<p><input class="form-control p-4" type="text" asp-for="UserLastName" disabled></p>
+											<p><input class="form-control p-4" type="text" asp-for="ProductName" disabled></p>
+											<p><input id="price" class="form-control p-4" type="text" asp-for="Price" disabled></p>
+											<p><input id="quantity" class="form-control p-4" type="number" min="1" value="1" asp-for="Quantity"></p>
+											<p><input id="TotalPrice" class="form-control p-4" type="number" value="@Model.Price" asp-for="TotalPrice" disabled></p>
+											<button type="submit">Place Order</button>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="order-details-wrap">
+						@* <table class="order-details">
+							<thead>
+								<tr>
+									<th>Your order Details</th>
+									<th>@Model.Product.price</th>
+								</tr>
+							</thead>
+							<tbody class="order-details-body">
+
+								<tr>
+									<td>@Model.Product.Name</td>
+									<td>$@Model.Product.price</td>
+								</tr>
+								<tr>
+									<td>Category</td>
+									<td>@Model.Product.Category.Name</td>
+								</tr>
+								<tr>
+									<td>Stock Level</td>
+									<td>@Model.Product.stocklevel</td>
+								</tr>
+							</tbody>
+							<tbody class="checkout-details">
+								<tr>
+									<td>Inventory</td>
+									<td>@Model.Product.inventory.Name</td>
+								</tr>
+								<tr>
+									<td>Shipping</td>
+									<td>$50</td>
+								</tr>
+							</tbody>
+						</table> *@
+						@* <a asp-controller="Order" asp-action="Create" class="boxed-btn">Place Order</a> *@
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end check out section -->
+	<!-- logo carousel -->
+	<div class="logo-carousel-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="logo-carousel-inner">
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/1.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/2.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/3.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/4.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="assets/img/company-logos/5.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end logo carousel -->
+
+
+</form>
